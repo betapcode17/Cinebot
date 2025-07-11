@@ -6,36 +6,16 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "favorites")
 public class Favorite {
+    @Id
+    private Long id; // Khóa chính duy nhất
+
     @Column(value = "user_id")
-    public com.movieweb.ai.cinebot.entity.User user;
+    private Long userId; // Thay vì lưu toàn bộ đối tượng User
 
     @Column(value = "movie_id")
-    public com.movieweb.ai.cinebot.entity.Movie movie;
+    private Long movieId; // Thay vì lưu toàn bộ đối tượng Movie
 
-    @Id
-    @Column(value = "user_id")
-    public Long id;
-
-    @Id
-    @Column(value = "movie_id")
-    public Long id1;
-
-    public com.movieweb.ai.cinebot.entity.User getUser() {
-        return user;
-    }
-
-    public void setUser(com.movieweb.ai.cinebot.entity.User user) {
-        this.user = user;
-    }
-
-    public com.movieweb.ai.cinebot.entity.Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(com.movieweb.ai.cinebot.entity.Movie movie) {
-        this.movie = movie;
-    }
-
+    // Getters và setters
     public Long getId() {
         return id;
     }
@@ -44,12 +24,19 @@ public class Favorite {
         this.id = id;
     }
 
-    public Long getId1() {
-        return id1;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId1(Long id1) {
-        this.id1 = id1;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+    }
 }

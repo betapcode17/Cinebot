@@ -6,36 +6,16 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "movie_genres")
 public class MovieGenre {
+    @Id
+    private Long id; // Khóa chính duy nhất
+
     @Column(value = "movie_id")
-    public com.movieweb.ai.cinebot.entity.Movie movie;
+    private Long movieId; // Thay vì lưu toàn bộ đối tượng Movie
 
     @Column(value = "genre_id")
-    public Genre genre;
+    private Integer genreId; // Thay vì lưu toàn bộ đối tượng Genre
 
-    @Id
-    @Column(value = "movie_id")
-    public Long id;
-
-    @Id
-    @Column(value = "genre_id")
-    public Integer id1;
-
-    public com.movieweb.ai.cinebot.entity.Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(com.movieweb.ai.cinebot.entity.Movie movie) {
-        this.movie = movie;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
+    // Getters và setters
     public Long getId() {
         return id;
     }
@@ -44,12 +24,19 @@ public class MovieGenre {
         this.id = id;
     }
 
-    public Integer getId1() {
-        return id1;
+    public Long getMovieId() {
+        return movieId;
     }
 
-    public void setId1(Integer id1) {
-        this.id1 = id1;
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
     }
 
+    public Integer getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
+    }
 }
