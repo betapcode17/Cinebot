@@ -50,6 +50,8 @@ public class TmdbService {
                     continue;
                 }
                 Movie movie = new Movie();
+                System.out.println("Đang xử lý phim TMDB ID: " + movieNode.get("id").asLong());
+                System.out.println("Tên phim: " + movieNode.get("title").asText());
                 movie.setVoteCount(movieNode.get("vote_count").asInt());
                 movie.setOriginalTitle(movieNode.get("original_title").asText());
                 movie.setOriginalLanguage(movieNode.get("original_language").asText());
