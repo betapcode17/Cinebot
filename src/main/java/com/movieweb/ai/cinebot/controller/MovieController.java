@@ -2,13 +2,10 @@ package com.movieweb.ai.cinebot.controller;
 
 
 import com.movieweb.ai.cinebot.entity.Movie;
-import com.movieweb.ai.cinebot.repository.MovieRepository;
 import com.movieweb.ai.cinebot.service.MovieService;
-import com.movieweb.ai.cinebot.service.TmdbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.movieweb.ai.cinebot.service.MovieService;
 
 import java.util.List;
 

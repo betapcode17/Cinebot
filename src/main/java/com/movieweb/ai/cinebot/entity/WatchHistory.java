@@ -1,55 +1,32 @@
 package com.movieweb.ai.cinebot.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
+@Getter
+@Setter
+@Entity
 @Table(name = "watch_history")
 public class WatchHistory {
     @Id
-    public Long id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Column(value = "user_id")
-    public User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(value = "movie_id")
-    public Movie movie;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
-    @Column(value = "watched_at")
-    public Instant watchedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Instant getWatchedAt() {
-        return watchedAt;
-    }
-
-    public void setWatchedAt(Instant watchedAt) {
-        this.watchedAt = watchedAt;
-    }
+    @Column(name = "watched_at")
+    private Instant watchedAt;
 
 }

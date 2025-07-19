@@ -1,42 +1,28 @@
 package com.movieweb.ai.cinebot.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+@Getter
+@Setter
+@Entity
 @Table(name = "favorites")
 public class Favorite {
-    @Id
-    private Long id; // Khóa chính duy nhất
+    @EmbeddedId
+    private FavoriteId id;
 
-    @Column(value = "user_id")
-    private Long userId; // Thay vì lưu toàn bộ đối tượng User
+    @MapsId("userId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id", nullable = false)
+    private com.movieweb.ai.cinebot.entity.User user;
 
-    @Column(value = "movie_id")
-    private Long movieId; // Thay vì lưu toàn bộ đối tượng Movie
+    @MapsId("movieId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "movie_id", nullable = false)
+    private com.movieweb.ai.cinebot.entity.Movie movie;
 
-    // Getters và setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
 }

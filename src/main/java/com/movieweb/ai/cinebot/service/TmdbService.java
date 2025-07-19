@@ -63,7 +63,6 @@ public class TmdbService {
                 movie.setPopularity(movieNode.get("popularity").asDouble());
                 movie.setTitle(movieNode.get("title").asText());
                 movie.setOverview(movieNode.get("overview").asText());
-                movie.setTmdbId(movieNode.get("id").asLong());
                 movie.setVoteAverage(movieNode.get("vote_average").asDouble());
                 movieRepository.save(movie);
             }

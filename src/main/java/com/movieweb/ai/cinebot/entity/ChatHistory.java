@@ -1,66 +1,38 @@
 package com.movieweb.ai.cinebot.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
+@Getter
+@Setter
+@Entity
 @Table(name = "chat_history")
 public class ChatHistory {
     @Id
-    public Long id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Column(value = "user_id")
-    public com.movieweb.ai.cinebot.entity.User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id")
+    private com.movieweb.ai.cinebot.entity.User user;
 
-    @Column(value = "message")
-    public String message;
+    @NotNull
+    @Lob
+    @Column(name = "message", nullable = false)
+    private String message;
 
-    @Column(value = "response")
-    public String response;
+    @Lob
+    @Column(name = "response")
+    private String response;
 
-    @Column(value = "created_at")
-    public Instant createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public com.movieweb.ai.cinebot.entity.User getUser() {
-        return user;
-    }
-
-    public void setUser(com.movieweb.ai.cinebot.entity.User user) {
-        this.user = user;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Column(name = "created_at")
+    private Instant createdAt;
 
 }

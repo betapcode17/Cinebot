@@ -1,35 +1,38 @@
 package com.movieweb.ai.cinebot.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "movies")
-@Data
-@NoArgsConstructor
 public class Movie {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Size(max = 255)
     @Column(name = "title")
     private String title;
 
+    @Size(max = 255)
     @Column(name = "original_title")
     private String originalTitle;
 
-    @Column(name = "overview", columnDefinition = "TEXT")
+    @Lob
+    @Column(name = "overview")
     private String overview;
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    @Column(name = "original_language")
+    @Size(max = 10)
+    @Column(name = "original_language", length = 10)
     private String originalLanguage;
 
     @Column(name = "vote_average")
@@ -41,9 +44,11 @@ public class Movie {
     @Column(name = "popularity")
     private Double popularity;
 
+    @Size(max = 255)
     @Column(name = "poster_path")
     private String posterPath;
 
+    @Size(max = 255)
     @Column(name = "backdrop_path")
     private String backdropPath;
 
@@ -53,6 +58,7 @@ public class Movie {
     @Column(name = "video")
     private Boolean video;
 
-    @Column(name = "tmdb_id", unique = true)
-    private Long tmdbId; // Bạn cần thêm trường này để tránh import trùng phim từ TMDB
+    @Column(name = "tmdb_id")
+    private Long tmdbId;
+
 }

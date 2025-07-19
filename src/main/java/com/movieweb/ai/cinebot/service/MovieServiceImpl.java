@@ -2,7 +2,6 @@ package com.movieweb.ai.cinebot.service;
 
 import com.movieweb.ai.cinebot.entity.Movie;
 import com.movieweb.ai.cinebot.repository.MovieRepository;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

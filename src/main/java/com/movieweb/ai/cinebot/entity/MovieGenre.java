@@ -1,42 +1,29 @@
 package com.movieweb.ai.cinebot.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+@Getter
+@Setter
+@Entity
 @Table(name = "movie_genres")
 public class MovieGenre {
-    @Id
-    private Long id; // Khóa chính duy nhất
+    @EmbeddedId
+    private MovieGenreId id;
 
-    @Column(value = "movie_id")
-    private Long movieId; // Thay vì lưu toàn bộ đối tượng Movie
+    @MapsId("movieId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "movie_id", nullable = false)
+    private com.movieweb.ai.cinebot.entity.Movie movie;
 
-    @Column(value = "genre_id")
-    private Integer genreId; // Thay vì lưu toàn bộ đối tượng Genre
+    @MapsId("genreId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
 
-    // Getters và setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
-
-    public Integer getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(Integer genreId) {
-        this.genreId = genreId;
-    }
 }

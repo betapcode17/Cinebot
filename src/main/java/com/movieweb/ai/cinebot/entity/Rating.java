@@ -1,77 +1,40 @@
 package com.movieweb.ai.cinebot.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
+@Getter
+@Setter
+@Entity
 @Table(name = "ratings")
 public class Rating {
     @Id
-    public Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Column(value = "user_id")
-    public com.movieweb.ai.cinebot.entity.User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id")
+    private com.movieweb.ai.cinebot.entity.User user;
 
-    @Column(value = "movie_id")
-    public Movie movie;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
-    @Column(value = "rating")
-    public Integer rating;
+    @Column(name = "rating")
+    private Integer rating;
 
-    @Column(value = "comment")
-    public String comment;
+    @Lob
+    @Column(name = "comment")
+    private String comment;
 
-    @Column(value = "created_at")
-    public Instant createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public com.movieweb.ai.cinebot.entity.User getUser() {
-        return user;
-    }
-
-    public void setUser(com.movieweb.ai.cinebot.entity.User user) {
-        this.user = user;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Column(name = "created_at")
+    private Instant createdAt;
 
 }
