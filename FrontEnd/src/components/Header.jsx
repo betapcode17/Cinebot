@@ -18,9 +18,9 @@ const Header = ({ onSearch }) => {
 
         {/* Navigation */}
         <nav className="flex flex-wrap items-center justify-center space-x-4 text-sm md:text-base">
-          <a href="#" className="hover:text-red-500 transition">
+          <Link to="/" className="hover:text-red-500 transition">
             Home
-          </a>
+          </Link>
           <a href="#" className="hover:text-red-500 transition">
             Genre
           </a>

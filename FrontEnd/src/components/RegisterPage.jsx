@@ -1,6 +1,7 @@
 import { useState } from "react";
 import bgImg from "../assets/bg-login.jpg";
 import { Link } from "react-router-dom";
+import { registerApi } from "../service/UserService";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,18 @@ function RegisterPage() {
       alert("Passwords do not match!");
       return;
     }
-    alert(`Email: ${email}, Password: ${password}`);
+    try {
+      const res = registerApi(email, password);
+      if (res.status === 201) {
+        alert("Registration successful!");
+        // TODO: chuyển hướng hoặc lưu token
+      } else {
+        alert("Registration failed. Please check your information.");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("An error occurred during registration.");
+    }
   };
 
   return (

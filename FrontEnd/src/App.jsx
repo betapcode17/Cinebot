@@ -8,6 +8,8 @@ import { MovieProvider } from "./context/MovieDetailContext";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import Footer from "./components/Footer";
+import MovieDetail from "./pages/MovieDetail";
+
 function Home({ trendingMovies, topRatedMovies, searchData, onSearch }) {
   return (
     <div className="h-full bg-black text-white min-h-screen pb-10 relative">
@@ -96,6 +98,8 @@ function App() {
   return (
     <MovieProvider>
       <div className="flex flex-col min-h-screen bg-black text-white">
+        <Header onSearch={handleSearch} />
+
         <div className="flex-grow">
           <Routes>
             <Route
@@ -109,10 +113,12 @@ function App() {
                 />
               }
             />
+            <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
           </Routes>
         </div>
+
         <Footer />
       </div>
     </MovieProvider>

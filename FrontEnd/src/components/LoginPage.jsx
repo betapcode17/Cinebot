@@ -46,13 +46,13 @@ function LoginPage() {
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
 
-        <label htmlFor="email" className="text-sm">
-          Email or phone number
+        <label htmlFor="Username" className="text-sm">
+          Username
         </label>
         <input
-          id="email"
+          id="Username"
           type="text"
-          placeholder="Email or phone number"
+          placeholder="Username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-2 mb-4 mt-1 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
