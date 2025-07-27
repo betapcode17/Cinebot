@@ -52,7 +52,7 @@ const CinemaMovies = () => {
   }, [filters, page]);
 
   return (
-    <div className="bg-[#111] px-4 py-6 text-white">
+    <div className="px-8 py-6 text-white mt-20">
       <FilterBar filters={filters} setFilters={setFilters} setPage={setPage} />
       <h2 className="text-2xl font-semibold mb-4">Phim lẻ</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">

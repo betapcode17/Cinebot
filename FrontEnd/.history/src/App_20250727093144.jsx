@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import Banner from "./components/Banner";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
-
-import MovieDetail from "./pages/MovieDetail";
-import CinemaMovies from "./pages/CinemaMovies";
-
+import MovieList from "./components/MovieList";
+import MovieSearch from "./components/MovieSearch";
+import { MovieProvider } from "./context/MovieDetailContext";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import Home from "./pages/Home"; // chuyển Home vào thư mục pages
-
-import { MovieProvider } from "./context/MovieDetailContext";
+import Footer from "./components/Footer";
+import MovieDetail from "./pages/MovieDetail";
+import CinemaMovies from "./pages/CinemaMovies";
+import TvShows from "./pages/TvShows";
+function Home({ trendingMovies, topRatedMovies, searchData, onSearch }) {
+  return (
+    <div className="h-full bg-black text-white min-h-screen pb-10 relative">
+      <Header onSearch={onSearch} />
+      <Banner />
+      {searchData.length === 0 && (
+        <>
+          <MovieList title="Phim Hot" data={trendingMovies.slice(0, 10)} />
+          <MovieList title="Phim đề cử" data={topRatedMovies.slice(0, 10)} />
+        </>
+      )}
+      {searchData.length > 0 && <MovieSearch data={searchData} />}
+    </div>
+  );
+}
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -57,7 +71,7 @@ function App() {
 
       const urls = [
         "https://api.themoviedb.org/3/trending/movie/day?language=vi",
-        "https://api.themoviedb.org/3/movie/popular?language=vi&page=1",
+        "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
       ];
 
       try {
@@ -86,6 +100,7 @@ function App() {
     <MovieProvider>
       <div className="flex flex-col min-h-screen bg-black text-white">
         <Header onSearch={handleSearch} />
+
         <div className="flex-grow">
           <Routes>
             <Route
@@ -100,12 +115,13 @@ function App() {
               }
             />
             <Route path="/movies" element={<CinemaMovies />} />
-
+            <Route path="/tvshows" element={<TvShows />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
           </Routes>
         </div>
+
         <Footer />
       </div>
     </MovieProvider>

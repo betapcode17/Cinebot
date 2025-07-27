@@ -5,7 +5,7 @@ const FilterBar = ({ filters, setFilters, setPage }) => {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-4 mb-6 mt-24">
+    <div className="flex flex-wrap gap-4 mb-6">
       <input
         type="text"
         name="query"

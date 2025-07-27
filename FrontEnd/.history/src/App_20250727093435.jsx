@@ -6,10 +6,10 @@ import Footer from "./components/Footer";
 
 import MovieDetail from "./pages/MovieDetail";
 import CinemaMovies from "./pages/CinemaMovies";
-
+import TvShows from "./pages/TvShows";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import Home from "./pages/Home"; // chuyển Home vào thư mục pages
+import { Home } from "./pages/Home"; // nếu bạn export dạng: export const Home = () => {}
 
 import { MovieProvider } from "./context/MovieDetailContext";
 
@@ -100,7 +100,7 @@ function App() {
               }
             />
             <Route path="/movies" element={<CinemaMovies />} />
-
+            <Route path="/tvshows" element={<TvShows />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
