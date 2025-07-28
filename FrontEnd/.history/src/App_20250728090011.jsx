@@ -102,7 +102,7 @@ function App() {
             <Route path="/movies" element={<CinemaMovies />} />
             <Route path="/tvshows" element={<TvShows />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
-            <Route path="/tv/:id" element={<TVShowDetail />} />
+            <Route path="/tvshows/:id" element={<TVShowDetail />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
           </Routes>

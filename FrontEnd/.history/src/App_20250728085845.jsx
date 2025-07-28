@@ -10,7 +10,7 @@ import TvShows from "./pages/TvShows";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home"; // chuyển Home vào thư mục pages
-import TVShowDetail from "./pages/TVShowDetail"; // chuyển TVShowDetail vào thư mục pages
+
 import { MovieProvider } from "./context/MovieDetailContext";
 
 function App() {
@@ -102,7 +102,7 @@ function App() {
             <Route path="/movies" element={<CinemaMovies />} />
             <Route path="/tvshows" element={<TvShows />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
-            <Route path="/tv/:id" element={<TVShowDetail />} />
+            <Route path="/tvshows/:id" element={<TVShowDetail />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<RegisterPage />} />
           </Routes>

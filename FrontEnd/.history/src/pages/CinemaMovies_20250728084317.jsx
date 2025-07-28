@@ -52,29 +52,19 @@ const CinemaMovies = () => {
   }, [filters, page]);
 
   return (
-    <div className="bg-[#111] px-4 py-6 text-white">
-      <div className="max-w-7xl mx-auto">
-        {" "}
-        {/* div để căn giữa */}
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          setPage={setPage}
-        />
-        <h2 className="text-2xl font-semibold mb-4 ">Phim lẻ</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {movies.map((movie) => (
-            <MovieCard key={movie.id} data={movie} type="movie" />
-          ))}
-        </div>
-        <div className="mt-6 flex justify-center">
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
-        </div>
+    <div className="bg-[#111] px-4 py-6 text-white flex">
+      <FilterBar filters={filters} setFilters={setFilters} setPage={setPage} />
+      <h2 className="text-2xl font-semibold mb-4">Phim lẻ</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} data={movie} />
+        ))}
       </div>
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+      />
     </div>
   );
 };

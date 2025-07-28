@@ -52,25 +52,19 @@ const TvShows = () => {
   }, [filters, page]);
 
   return (
-    <div className="bg-[#111] px-4 py-6 text-white flex justify-center">
-      <div className="w-full max-w-7xl">
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          setPage={setPage}
-        />
-        <h2 className="text-2xl font-semibold mb-4">TV Shows</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {shows.map((item) => (
-            <MovieCard key={item.id} data={item} type="tv" />
-          ))}
-        </div>
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={setPage}
-        />
+    <div className="bg-[#111] px-4 py-6 text-white">
+      <FilterBar filters={filters} setFilters={setFilters} setPage={setPage} />
+      <h2 className="text-2xl font-semibold mb-4">TV Shows</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {shows.map((show) => (
+          <MovieCard key={show.id} data={show} />
+        ))}
       </div>
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+      />
     </div>
   );
 };
