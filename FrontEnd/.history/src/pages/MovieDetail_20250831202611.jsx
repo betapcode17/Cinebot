@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Recommended from "../components/Recommended";
 import DateSelect from "../components/DateSelect";
-import { getMovieCreadits, getTrailer, getMovieDetail } from "../api/movieApi";
+import { getMovieCreadits } from "../api/movieApi";
 const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
@@ -16,8 +17,16 @@ const MovieDetail = () => {
   useEffect(() => {
     const fetchMovieDetail = async () => {
       try {
-        const movie = await getMovieDetail(id);
-        setMovie(movie);
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?language=vi`,
+          {
+            headers: {
+              Authorization: `Bearer ${API_TOKEN}`,
+              accept: "application/json",
+            },
+          }
+        );
+        setMovie(res.data);
       } catch (err) {
         console.error("Error fetching movie detail:", err);
       }
@@ -25,7 +34,16 @@ const MovieDetail = () => {
 
     const fetchTrailer = async () => {
       try {
-        const trailer = getTrailer(id).find(
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?language=vi`,
+          {
+            headers: {
+              Authorization: `Bearer ${API_TOKEN}`,
+              accept: "application/json",
+            },
+          }
+        );
+        const trailer = res.data.results.find(
           (vid) => vid.type === "Trailer" && vid.site === "YouTube"
         );
         if (trailer) setVideoKey(trailer.key);

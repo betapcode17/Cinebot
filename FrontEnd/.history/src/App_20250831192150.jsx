@@ -19,7 +19,7 @@ import {
   getTrendingMovies,
   getPopularMovies,
   searchMovies,
-} from "./api/movieApi";
+} from "./services/tmdb";
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState([]);

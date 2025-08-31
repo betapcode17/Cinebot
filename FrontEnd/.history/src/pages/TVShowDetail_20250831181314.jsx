@@ -32,7 +32,6 @@ const TVShowDetail = () => {
       }
     };
 
-    //Lấy data từ api phim
     const fetchTrailer = async () => {
       try {
         const res = await axios.get(

@@ -1,23 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Recommended from "../components/Recommended";
 import DateSelect from "../components/DateSelect";
-import { getMovieCreadits, getTrailer, getMovieDetail } from "../api/movieApi";
 const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [videoKey, setVideoKey] = useState(null);
-  const [movieCredits, setMovieCredits] = useState(null);
 
   const IMG_URL = import.meta.env.VITE_IMG_URL;
   const API_TOKEN = import.meta.env.VITE_API_KEY;
+  const dateTime = {
+    "2025-09-01": ["10:00", "13:00", "18:30"],
+    "2025-09-02": ["09:00", "15:00", "20:00"],
+  };
 
   useEffect(() => {
     const fetchMovieDetail = async () => {
       try {
-        const movie = await getMovieDetail(id);
-        setMovie(movie);
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?language=vi`,
+          {
+            headers: {
+              Authorization: `Bearer ${API_TOKEN}`,
+              accept: "application/json",
+            },
+          }
+        );
+        setMovie(res.data);
       } catch (err) {
         console.error("Error fetching movie detail:", err);
       }
@@ -25,7 +36,16 @@ const MovieDetail = () => {
 
     const fetchTrailer = async () => {
       try {
-        const trailer = getTrailer(id).find(
+        const res = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?language=vi`,
+          {
+            headers: {
+              Authorization: `Bearer ${API_TOKEN}`,
+              accept: "application/json",
+            },
+          }
+        );
+        const trailer = res.data.results.find(
           (vid) => vid.type === "Trailer" && vid.site === "YouTube"
         );
         if (trailer) setVideoKey(trailer.key);
@@ -34,16 +54,6 @@ const MovieDetail = () => {
       }
     };
 
-    const fechMovieCreadits = async () => {
-      try {
-        const credits = await getMovieCreadits(id);
-        setMovieCredits(credits);
-      } catch (err) {
-        console.error("Error fetching credits:", err);
-      }
-    };
-
-    fechMovieCreadits();
     fetchMovieDetail();
     fetchTrailer();
   }, [id]);
@@ -117,29 +127,11 @@ const MovieDetail = () => {
             <p className="text-gray-300">{movie.overview}</p>
           </div>
 
-          {movieCredits?.cast && (
-            <div className="mt-8">
-              <h2 className="text-xl font-bold text-red-400 mb-4">DIỄN VIÊN</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {movieCredits.cast.slice(0, 8).map((actor) => (
-                  <div
-                    key={actor.cast_id}
-                    className="bg-gray-800 p-2 rounded-lg text-center"
-                  >
-                    <img
-                      src={`${IMG_URL}${actor.profile_path}`}
-                      alt={actor.name}
-                      className="w-full h-48 object-cover rounded"
-                    />
-                    <p className="mt-2 font-semibold">{actor.name}</p>
-                    <p className="text-sm text-gray-400">
-                      {actor.character || "Vai phụ"}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Đặt vé */}
+
+          <div className="mt-8">
+            <DateSelect dateTime></DateSelect>
+          </div>
 
           {/* Thông tin thêm */}
           <div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Recommended from "../components/Recommended";
 import DateSelect from "../components/DateSelect";

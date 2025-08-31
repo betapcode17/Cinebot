@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg-login.jpg";
-import { loginApi } from "../api/userApi";
+import { loginApi } from "../service/UserService";
 import { useAuth } from "../hooks/useAuth";
 
 function LoginPage() {

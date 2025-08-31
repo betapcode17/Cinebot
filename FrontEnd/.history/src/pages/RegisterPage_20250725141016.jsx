@@ -1,7 +1,7 @@
 import { useState } from "react";
 import bgImg from "../assets/bg-login.jpg";
 import { Link } from "react-router-dom";
-import { registerApi } from "../api/userApi";
+import { registerApi } from "../service/UserService";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
